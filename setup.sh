@@ -42,7 +42,8 @@ sed -i.bak "s/{{PROJECT_NAME}}/$project_name/g" pyproject.toml
 sed -i.bak "s/{{PACKAGE_NAME}}/$package_name/g" pyproject.toml
 sed -i.bak "s/project_name/$project_name/g" docs/mkdocs.yml
 sed -i.bak "s/src.project_name/src.$package_name/g" docs/reference/core.md
-rm pyproject.toml.bak docs/mkdocs.yml.bak docs/reference/core.md.bak
+sed -i.bak "s/project_name/$package_name/g" main.py
+rm pyproject.toml.bak docs/mkdocs.yml.bak docs/reference/core.md.bak main.py.bak
 print_success "Placeholder replacement complete."
 
 # 4. Initialize Git
@@ -74,3 +75,11 @@ echo ""
 print_success "Project '$project_name' is set up and ready to go!"
 print_info "A virtual environment has been created in .venv and activated."
 print_info "To start working, you can now use your IDE or continue in this shell."
+print_info ""
+print_info "Available commands:"
+print_info "  make run        - Run the main application"
+print_info "  make test       - Run tests"
+print_info "  make lint       - Run linting"
+print_info "  make format     - Format code"
+print_info "  make docs-serve - Serve documentation"
+print_info "  make help       - Show all available commands"

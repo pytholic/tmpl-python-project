@@ -2,12 +2,9 @@
 tmp/
 .DS_Store
 .coverage
-example.com/
 .ruff_cache/
 .mypy_cache/
 .cursor/
-Claude.local.md
-mlruns/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

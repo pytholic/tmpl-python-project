@@ -64,11 +64,19 @@ After running `setup.sh`, your project structure will be:
 
 ## Usage
 
--   **Install dependencies**: `uv pip install -e ".[dev,docs]"`
--   **Run tests**: `pytest`
--   **Lint and format**: `ruff check .` and `ruff format .`
--   **Build documentation**: `mkdocs build`
--   **Serve documentation locally**: `mkdocs serve`
+After setup, you can use the following commands:
+
+-   **Install dependencies**: `make install` or `uv pip install -e ".[dev,docs]"`
+-   **Run the application**: `make run`
+-   **Run tests**: `make test`
+-   **Run tests with coverage**: `make test-cov`
+-   **Lint code**: `make lint`
+-   **Format code**: `make format`
+-   **Type checking**: `make type-check`
+-   **Build documentation**: `make docs-build`
+-   **Serve documentation locally**: `make docs-serve`
+-   **Clean cache files**: `make clean`
+-   **Show all commands**: `make help`
 
 ## License
 

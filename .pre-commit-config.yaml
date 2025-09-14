@@ -54,11 +54,10 @@ repos:
     rev: v2.1.0
     hooks:
       - id: codespell
-        args: ["--skip=*.lock,refactor-docs/site/assets/*"]
+        args: ["--skip=*.lock"]
 
   # yaml lint
   - repo: https://github.com/adrienverge/yamllint
     rev: v1.29.0
     hooks:
       - id: yamllint
-        args: ["-c=.yamllint"]
