@@ -1,0 +1,180 @@
+[project]
+name = "tmpl-python-project"
+dynamic = ["version"]
+description = "A modern Python project template."
+authors = [
+    {name = "Your Name", email = "your.email@example.com"},
+]
+requires-python = ">=3.12"
+readme = "README.md"
+license = {text = "MIT"}
+dependencies = [
+    "python-dotenv>=1.0.0,<2.0.0",
+    "pydantic>=2.7.0,<3.0.0",
+    "pydantic-settings>=2.0.0,<3.0.0",
+    "rich>=13.7.0,<14.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0,<9.0.0",
+    "pre-commit>=3.7.0,<4.0.0",
+    "pytest-cov>=5.0.0,<6.0.0",
+    "pytest-mock>=3.14.0,<4.0.0",
+    "ruff>=0.11.13,<1.0.0",
+]
+docs = [
+    "mkdocs>=1.6.0,<2.0.0",
+    "mkdocs-material>=9.5.0,<10.0.0",
+    "mkdocstrings[python]>=0.25.0,<1.0.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+packages = ["src/tmpl_python_project"]
+
+[tool.hatch.version]
+path = "src/tmpl_python_project/__init__.py"
+
+[tool.uv]
+package = true
+
+[[tool.uv.index]]
+name = "pypi"
+url = "https://pypi.org/simple"
+default = true
+
+[tool.interrogate]
+fail-under=100
+exclude = ["tests", "build", "dist", "tmp", "refactor_tests", ".venv", ".docker_venv", ".ruff_cache"]
+ignore-module = true
+ignore-init-method = true
+ignore-regex = ["^_execute_callbacks"]
+verbose = 2
+omit-covered-files = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+exclude = ["__pycache__"]
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "Q",    # flake8-quotes
+    "A",    # prevent using keywords that clobber python builtins
+    "ISC",  # implicit string concatenation
+    "UP",   # alert you when better syntax is available in your python version, pyupgrade
+    "RUF",  # the ruff developer's own rules
+    "D",    # pydocstyle
+    "I",    # isort
+    "ANN", # flake8-annotations - Missing type annotation for function argument
+    "T20", # flake8-print - print and pprint are not allowed
+]
+ignore = [
+    "E501",
+    "A001",  # Ignore shadowing of python builtin words
+    "D100",  # Missing docstring in public module
+    "D101",  # Missing docstring in public class
+    "D102",  # Missing docstring in public method
+    "D103",  # Missing docstring in public function
+    "D104",  # Missing docstring in public package
+    "D105",  # Missing docstring in magic method
+    "D205",  # 1 blank line required between summary line and description
+    "D209",  # Multi-line docstring
+    "D210",  # No whitespaces allowed surrounding docstring text
+    "D400",  # First line should end with a period
+    "D401",  # First line should be in imperative mood
+    "D404",  # First word of the docstring should not be `This`
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*.py" = ["ANN401", "ANN201", 
+"ANN202", "ANN001"]
+
+# Docstring formatting options
+[tool.ruff.format]
+docstring-code-format = true
+docstring-code-line-length = 100
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.pytest.ini_options]
+testpaths = ["tests/"]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+]
+addopts = ["--durations=0", "--strict-markers", "--doctest-modules"]
+filterwarnings = ["ignore::DeprecationWarning", "ignore::UserWarning"]
+
+[tool.coverage.run]
+source = ["src"]
+omit = [
+    "src/tmpl_python_project/config.py",
+    "src/tmpl_python_project/logging.py",
+]
+
+[tool.mypy]
+# Python language version to use for type checking
+python_version = "3.12"
+# Disallow functions without type annotations
+disallow_untyped_defs = true
+# Disallow partial type annotations for functions
+disallow_incomplete_defs = true
+# Type-check the body of functions without annotations
+check_untyped_defs = true
+# Disallow decorators without type annotations
+disallow_untyped_decorators = true
+# Disallow using Any types that come from missing imports
+disallow_any_unimported = true
+# Treat missing parameter types as non-Optional
+no_implicit_optional = true
+# Enable strict handling of Optional types
+strict_optional = true
+# Warn about casting an expression to its inferred type
+warn_redundant_casts = true
+# Warn about # type: ignore comments not needed
+warn_unused_ignores = true
+# Warn when returning Any from a function with a non-Any return type
+warn_return_any = true
+# Warn about code determined to be unreachable
+warn_unreachable = true
+# Allow using Any in generic types like List[Any]
+disallow_any_generics = false
+# Disable implicit re-exporting of imported names
+implicit_reexport = false
+# Show error codes in error messages
+show_error_codes = true
+
+[tool.mypy.overrides]
+module = "tests.*"
+disallow_untyped_defs = false
+check_untyped_defs = false
+
+[tool.pyright]
+pythonVersion = "3.12"
+typeCheckingMode = "strict"
+exclude = ["tests"]
+
+reportMissingTypeArgument = "warning"
+reportUnnecessaryCast = "warning"
+reportUnusedIgnoreComment = "warning"
+reportUnreachable = "warning"
+reportUnknownMemberType = "warning"
+reportUnknownArgumentType = "warning"
+
+[[tool.pyright.executionEnvironments]]
+root = "tests"
+typeCheckingMode = "basic"
+reportMissingTypeArgument = "warning"
+reportUnknownParameterType = "warning"
+reportMissingParameterType = "warning"
+reportUnknownArgumentType = "warning"
+reportPrivateUsage = "warning"
+
