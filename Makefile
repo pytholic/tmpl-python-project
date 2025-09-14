@@ -5,12 +5,12 @@ setup:
 	@echo "Setting up Python environment..."
 	uv venv
 	@echo "Installing dependencies..."
-	uv pip install -e ".[dev,docs]"
+	uv sync --group dev --group docs
 	@echo "Setup complete! Activate the virtual environment with: source .venv/bin/activate"
 
 .PHONY: install
 install:
-	uv pip install -e ".[dev,docs]"
+	uv sync --group dev --group docs
 
 .PHONY: run
 run:
