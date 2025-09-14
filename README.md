@@ -11,7 +11,7 @@ A modern, comprehensive, and opinionated project template for Python.
 -   **Testing**: `pytest` setup for unit and integration tests.
 -   **Type Hinting**: Enforced with `mypy` and `pyright` for robust code.
 -   **Documentation**: [`mkdocs`](https://www.mkdocs.org/) with Material theme ready to go.
--   **Automation**: A simple `setup.sh` script to quickly start a new project.
+-   **Simple Setup**: Easy Makefile commands for environment setup and project management.
 
 ## Getting Started
 
@@ -22,50 +22,49 @@ A modern, comprehensive, and opinionated project template for Python.
     cd my-awesome-project
     ```
 
-2.  **Run the setup script.**
-
-    The script will automatically detect your project name from the directory name and set everything up:
+2.  **Set up your environment.**
 
     ```bash
-    ./setup.sh
+    make setup
     ```
 
-    The script will:
-    - Detect the project name from your directory name
-    - Convert it to a valid Python package name
-    - Rename all template files accordingly
-    - Initialize a new git repository
-    - Set up a virtual environment and install dependencies
+    This will:
+    - Create a virtual environment using `uv`
+    - Install all dependencies (dev and docs)
+    - Activate the virtual environment
+
+3.  **Customize your project.**
+
+    - Update `pyproject.toml` with your project name, version, and build paths
+    - Rename/organize files in the `src/` directory as needed
+    - Create subfolders like `core/` or rename modules to fit your project structure
 
 ## Project Structure
 
 ```
 .
 ├── docs/                 # Documentation files
-├── src/                  # Source code
-│   └── project_name/     # Template package (renamed during setup)
+├── src/                  # Source code (organize as needed)
+│   ├── config.py         # Configuration settings
+│   ├── exceptions.py     # Custom exceptions
+│   ├── logging.py        # Logging configuration
+│   └── utils.py          # Utility functions
 ├── tests/                # Tests (unit and integration)
-├── setup.sh              # Setup script
+├── Makefile              # Development commands
 ├── pyproject.toml        # Project configuration and dependencies
 └── README.md
 ```
 
-After running `setup.sh`, your project structure will be:
-
-```
-.
-├── docs/                 # Documentation files
-├── src/                  # Source code
-│   └── your_package/     # Your project's package
-├── tests/                # Tests (unit and integration)
-├── pyproject.toml        # Project configuration and dependencies
-└── README.md
-```
+The `src/` directory is kept simple and flat. You can:
+- Create subfolders like `src/core/`, `src/api/`, etc. as your project grows
+- Rename modules to fit your domain (e.g., `models.py`, `services.py`)
+- Update imports in `main.py` and `pyproject.toml` accordingly
 
 ## Usage
 
 After setup, you can use the following commands:
 
+-   **Setup environment**: `make setup` (creates venv and installs dependencies)
 -   **Install dependencies**: `make install` or `uv pip install -e ".[dev,docs]"`
 -   **Run the application**: `make run`
 -   **Run tests**: `make test`

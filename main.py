@@ -1,7 +1,7 @@
 """Main entry point for the application."""
 
-from project_name.config import settings
-from project_name.logging import logger
+from src.config import settings
+from src.logging import logger
 
 
 def main() -> None:

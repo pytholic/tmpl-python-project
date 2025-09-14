@@ -1,5 +1,13 @@
 SHELL := bash
 
+.PHONY: setup
+setup:
+	@echo "Setting up Python environment..."
+	uv venv
+	@echo "Installing dependencies..."
+	uv pip install -e ".[dev,docs]"
+	@echo "Setup complete! Activate the virtual environment with: source .venv/bin/activate"
+
 .PHONY: install
 install:
 	uv pip install -e ".[dev,docs]"
@@ -51,6 +59,7 @@ clean:
 .PHONY: help
 help:
 	@echo "Available commands:"
+	@echo "  setup       Setup virtual environment and install dependencies"
 	@echo "  install     Install dependencies"
 	@echo "  run         Run the main application"
 	@echo "  test        Run tests"
